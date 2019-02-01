@@ -10,6 +10,12 @@
   "projects": {
     "nestjs-starter": {
       "tags": []
+    },
+    "angular-starter": {
+      "tags": []
+    },
+    "angular-starter-e2e": {
+      "tags": []
     }
   }
 }
