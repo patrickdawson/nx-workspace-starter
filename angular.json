@@ -2,7 +2,65 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "nestjs-starter": {
+      "root": "apps/nestjs-starter",
+      "sourceRoot": "apps/nestjs-starter/src",
+      "projectType": "application",
+      "prefix": "nestjs-starter",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/builders:node-build",
+          "options": {
+            "outputPath": "dist/apps/nestjs-starter",
+            "main": "apps/nestjs-starter/src/main.ts",
+            "tsConfig": "apps/nestjs-starter/tsconfig.app.json",
+            "assets": [
+              "apps/nestjs-starter/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/nestjs-starter/src/environments/environment.ts",
+                  "with": "apps/nestjs-starter/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/builders:node-execute",
+          "options": {
+            "buildTarget": "nestjs-starter:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/nestjs-starter/tsconfig.app.json",
+              "apps/nestjs-starter/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/nestjs-starter/jest.config.js",
+            "tsConfig": "apps/nestjs-starter/tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
