@@ -12,10 +12,10 @@ import { AirportModule } from './airport/airport.module';
     FlightModule,
     PassengerModule,
     CoreModule,
-    MongooseModule.forRoot('mongodb://heroku_nhjc4749:3efp4l15pvjqmm4k0ud7klfb0i@ds263295.mlab.com:63295/heroku_nhjc4749'),
+    MongooseModule.forRoot(''),
     AirportModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}

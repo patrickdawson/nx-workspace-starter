@@ -36,8 +36,7 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "nestjs-starter:build",
-            "inspect": false
+            "buildTarget": "nestjs-starter:build"
           }
         },
         "lint": {
@@ -225,7 +224,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/builders:node-build",
+          "builder": "@nrwl/node:build",
           "options": {
             "outputPath": "dist/apps/airport",
             "main": "apps/airport/src/main.ts",
@@ -249,7 +248,7 @@
           }
         },
         "serve": {
-          "builder": "@nrwl/builders:node-execute",
+          "builder": "@nrwl/node:build",
           "options": {
             "buildTarget": "airport:build",
             "inspect": false
@@ -268,7 +267,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/node:jest",
           "options": {
             "jestConfig": "apps/airport/jest.config.js",
             "tsConfig": "apps/airport/tsconfig.spec.json"
