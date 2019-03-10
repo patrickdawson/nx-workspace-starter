@@ -16,7 +16,9 @@
             "outputPath": "dist/apps/nestjs-starter",
             "main": "apps/nestjs-starter/src/main.ts",
             "tsConfig": "apps/nestjs-starter/tsconfig.app.json",
-            "assets": ["apps/nestjs-starter/src/assets"]
+            "assets": [
+              "apps/nestjs-starter/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -34,7 +36,8 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "nestjs-starter:build"
+            "buildTarget": "nestjs-starter:build",
+            "inspect": false
           }
         },
         "lint": {
@@ -44,7 +47,9 @@
               "apps/nestjs-starter/tsconfig.app.json",
               "apps/nestjs-starter/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -75,7 +80,9 @@
               "apps/angular-starter/src/favicon.ico",
               "apps/angular-starter/src/assets"
             ],
-            "styles": ["apps/angular-starter/src/styles.css"],
+            "styles": [
+              "apps/angular-starter/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -129,7 +136,9 @@
             "polyfills": "apps/angular-starter/src/polyfills.ts",
             "tsConfig": "apps/angular-starter/tsconfig.spec.json",
             "karmaConfig": "apps/angular-starter/karma.conf.js",
-            "styles": ["apps/angular-starter/src/styles.css"],
+            "styles": [
+              "apps/angular-starter/src/styles.css"
+            ],
             "scripts": [],
             "assets": [
               "apps/angular-starter/src/favicon.ico",
@@ -144,7 +153,9 @@
               "apps/angular-starter/tsconfig.app.json",
               "apps/angular-starter/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -170,7 +181,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/angular-starter-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -196,11 +209,72 @@
               "libs/shared/tsconfig.lib.json",
               "libs/shared/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       },
       "schematics": {}
+    },
+    "airport": {
+      "root": "apps/airport",
+      "sourceRoot": "apps/airport/src",
+      "projectType": "application",
+      "prefix": "airport",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/builders:node-build",
+          "options": {
+            "outputPath": "dist/apps/airport",
+            "main": "apps/airport/src/main.ts",
+            "tsConfig": "apps/airport/tsconfig.app.json",
+            "assets": [
+              "apps/airport/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/airport/src/environments/environment.ts",
+                  "with": "apps/airport/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/builders:node-execute",
+          "options": {
+            "buildTarget": "airport:build",
+            "inspect": false
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/airport/tsconfig.app.json",
+              "apps/airport/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/airport/jest.config.js",
+            "tsConfig": "apps/airport/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {
