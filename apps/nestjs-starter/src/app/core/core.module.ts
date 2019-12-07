@@ -4,8 +4,9 @@ import * as redisStore from 'cache-manager-redis-store';
 import { GraphQLModule } from '@nestjs/graphql';
 import { environment } from '../../environments/environment';
 
-const mongodbUri = '';
-const redisUri = '';
+// TODO: DELETE ME BEFORE YOU PUSH TO GIT
+const mongodbUri = 'mongodb://heroku_v9484k0p:km8b4k0f87l6n1990ipng6p865@ds233198.mlab.com:33198/heroku_v9484k0p';
+const redisUri = 'redis://redistogo:63447feef378e87ed66e1d692aa9750c@porgy.redistogo.com:11709/';
 
 const loggerProvider: Provider = {provide: Logger, useFactory: () => new Logger('FlightServer')};
 
