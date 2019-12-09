@@ -16,6 +16,7 @@ import { FlightService } from './flight.service';
 import { AuthenticationGuard } from '../authentication/authentication.guard';
 import { DelayInterceptor } from '../interceptors/delay.interceptor';
 import { LoggerInterceptor } from '../interceptors/logger.interceptor';
+import { DatePipe } from '../pipes/date.pipe';
 
 @Controller('flight')
 @UseGuards(AuthenticationGuard)
@@ -26,8 +27,13 @@ export class FlightController {
     }
 
     @Get()
-    getFlights(@Query('from') from: string, @Query('to') to: string): Flight[] {
-        return this.flightService.getFlights(from, to);
+    getFlights(
+      @Query('from') from: string,
+      @Query('to') to: string,
+      @Query('fromDate', DatePipe) toDate: Date,
+      @Query('toDate', DatePipe) fromDate: Date,
+    ): Flight[] {
+        return this.flightService.getFlights(from, to, fromDate, toDate);
     }
 
     @Get(':id')
