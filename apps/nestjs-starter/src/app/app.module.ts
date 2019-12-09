@@ -16,6 +16,6 @@ import { AirportModule } from './airport/airport.module';
     AirportModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}

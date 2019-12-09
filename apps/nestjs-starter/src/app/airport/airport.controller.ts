@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AirportService } from './airport.service';
 import { Observable } from 'rxjs';
 
@@ -9,5 +9,10 @@ export class AirportController {
   @Get()
   public getAirports(): Observable<string[]> {
     return this.airportService.getAirports();
+  }
+
+  @Post()
+  public logAirports(@Body('data') data) {
+    this.airportService.logAirports(data);
   }
 }

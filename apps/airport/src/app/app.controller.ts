@@ -1,8 +1,14 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
+import { Controller, Logger, UseGuards } from '@nestjs/common';
+import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
+import { AirportGuard } from './airport.guard';
 
 @Controller()
 export class AppController {
+
+  constructor(private readonly logger: Logger) {
+  }
+
+  @UseGuards(AirportGuard)
   @MessagePattern({cmd: 'airports'})
   public getAirports(): string[] {
     return [
@@ -10,5 +16,10 @@ export class AppController {
       'Flughafen Manfred Rommel Stuttgart',
       'Flughafen Helmut Schmidt Hamburg'
     ];
+  }
+
+  @EventPattern('LOG')
+  log(@Payload() data: string) {
+   this.logger.log('Logging data ' + data);
   }
 }
