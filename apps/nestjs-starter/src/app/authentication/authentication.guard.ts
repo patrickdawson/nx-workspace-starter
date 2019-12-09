@@ -8,7 +8,7 @@ export class AuthenticationGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
     const authorizationHeader = request.headers['authorization'];
-    if (authorizationHeader && authorizationHeader.indexOf('Bearer jwt123456token') !== -1) {
+    if (authorizationHeader && authorizationHeader.indexOf('Bearer jwt123456token') !== -1 && request.user && request.user.role === 'admin') {
       return true;
     }
     throw new UnauthorizedException();
