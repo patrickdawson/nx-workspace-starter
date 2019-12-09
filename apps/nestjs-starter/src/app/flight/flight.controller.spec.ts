@@ -124,10 +124,10 @@ describe('Flight Controller', () => {
   it('should return HTTP-Status 401 if no "Authorization" Header is set', () => {
     return request(app.getHttpServer())
       .get('/flight')
-      .expect(401)
+      .expect(418)
       .expect({
-        statusCode: 401,
-        error: 'Unauthorized'
+        statusCode: 418,
+        message: 'I\'m a Teapot'
       });
   });
 
