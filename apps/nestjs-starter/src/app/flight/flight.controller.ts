@@ -1,14 +1,18 @@
 import { Controller, Get, Query, Post, Body, Param, Delete, HttpCode, HttpException } from '@nestjs/common';
 import { Flight } from '@flight-app/shared';
 import flights from '../../../mock-data/flights.json';
+import { FlightService } from './flight.service';
 
 @Controller('flight')
 export class FlightController {
     private flights: Flight[] = flights;
 
+    constructor(private flightService: FlightService) {
+    }
+
     @Get()
     getFlights(@Query('from') from: string, @Query('to') to: string): Flight[] {
-        return this.flights.filter(flight => flight.from === from && flight.to === to)
+      return this.flightService.getFlights(from, to);
     }
 
     @Get(':id')
