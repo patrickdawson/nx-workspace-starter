@@ -8,14 +8,16 @@ import {
   Delete,
   HttpCode,
   NotFoundException,
-  UseGuards
+  UseGuards, UseInterceptors
 } from '@nestjs/common';
 import { Flight } from '@flight-app/shared';
 import { FlightService } from './flight.service';
 import { AuthenticationGuard } from '../authentication/authentication.guard';
+import { LoggerInterceptor } from '../interceptors/logger.interceptor';
 
 @Controller('flight')
 @UseGuards(AuthenticationGuard)
+@UseInterceptors(LoggerInterceptor)
 export class FlightController {
 
     constructor(private flightService: FlightService) {
