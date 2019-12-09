@@ -41,4 +41,39 @@ describe('FlightService', () => {
       }
     ]);
   });
+
+  it('should return correct flight for GET "/flight/3', () => {
+    expect(service.getFlightById(3)).toEqual({
+        id: 3,
+        from: 'Hamburg',
+        to: 'Graz',
+        date: '2019-02-22T07:07:54.1624336+00:00',
+        delayed: false
+      });
+  });
+
+  it('should successfully create a new flight for POST "/flight"', () => {
+    expect(service.createFlight({
+      from: 'Stuttgart',
+      to: 'Hamburg',
+      date: '2019-02-23T07:07:54.1624336+00:00',
+      delayed: false,
+      id: 3,
+    })).toEqual({
+        from: 'Stuttgart',
+        to: 'Hamburg',
+        date: '2019-02-23T07:07:54.1624336+00:00',
+        delayed: false,
+        id: 174
+      });
+  });
+
+  it('should successfully delete a flight for DELETE "/flight/174"', () => {
+    expect(service.deleteFlight(3)).toBeTruthy();
+
+  });
+
+  it('should return HTTP-Status 404 for DELETE "/flight/175"', () => {
+    expect(service.deleteFlight(175)).toBeFalsy();
+  });
 });
