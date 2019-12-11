@@ -1,6 +1,16 @@
-import { OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, WebSocketGateway, WebSocketServer, WsResponse } from '@nestjs/websockets';
-import { FlightNewsService } from './flight-news.service';
+import {
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  OnGatewayInit,
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+  WsResponse
+} from '@nestjs/websockets';
 import * as SocketIO from 'socket.io';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { FlightNewsService } from './flight-news.service';
 
 @WebSocketGateway()
 export class FlightNewsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -16,4 +26,17 @@ export class FlightNewsGateway implements OnGatewayInit, OnGatewayConnection, On
 
   // This Lifecycle hook is invoked when a connected client disconnects
   handleDisconnect(client: SocketIO.Socket): any { }
+
+  @SubscribeMessage('flightNews')
+  getLatestFlightNews(): Observable<WsResponse<string>> {
+    return this.flightNewsService.getFlightNews().pipe(
+      map(flightNews => ({event: 'flightNews', data: flightNews}))
+    );
+  }
+
+  pushLatestFlightNews() {
+    this.flightNewsService.getFlightNews().subscribe((news: string) => {
+      this.server.emit('flightNews', news);
+    });
+  }
 }

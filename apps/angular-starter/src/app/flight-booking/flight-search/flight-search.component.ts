@@ -27,6 +27,9 @@ export class FlightSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.socket.connect();
+    this.socket.emit('flightNews');
+    this.flightNews$ = this.socket.fromEvent<string>('flightNews');
   }
 
   search(): void {
